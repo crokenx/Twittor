@@ -1,6 +1,6 @@
 importScripts("js/se-utils.js");
-const STATIC_CACHE = "static-v3";
-const DINAMIC_CACHE = "dinamic-v1";
+const STATIC_CACHE = "static-v4";
+const DINAMIC_CACHE = "dinamic-v2";
 const INMUTABLE_CACHE = "inmutable-v1";
 
 const APP_SHELL = [
@@ -40,6 +40,9 @@ self.addEventListener("activate", (e) => {
   const response = caches.keys().then((keys) => {
     keys.forEach((key) => {
       if (key !== STATIC_CACHE && key.includes("static")) {
+        return caches.delete(key);
+      }
+      if (key !== DINAMIC_CACHE && key.includes("dinamic")) {
         return caches.delete(key);
       }
     });
